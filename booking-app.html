@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <div class="divclass">
+<form action="" id="addform">
+<label for="name">name</label>
+<input type="text" id="name" placeholder="enter your name" >
+<label for="email">EmailId</label>
+<input type="email" id="email" placeholder="enter your Email Id" >
+<label for="phone">Phone Number</label>
+<input type="phone" id="phone"placeholder="enter your Phone number"  >
+<button>submit</button>
+
+</form>
+
+<ul id="ullist" ></ul>
+
+</div>   
+<script>
+const form=document.getElementById('addform');
+form.addEventListener('submit',function (e){
+    e.preventDefault(); 
+
+
+var name=document.getElementById('name').value;
+var email=document.getElementById('email').value;
+var phone =document.getElementById('phone').value;
+
+
+let objec={
+    name:name,
+    email:email,
+    phone:phone
+};
+
+
+let objec_ser=JSON.stringify(objec);
+localStorage.setItem(email,objec_ser);
+console.log(objec_ser);
+console.log(localStorage);
+
+
+var ul=document.getElementById('ullist');
+
+var list=document.createElement('li');
+list.appendChild(document.createTextNode(name+' - '));
+list.appendChild(document.createTextNode(email+' - '));
+list.appendChild(document.createTextNode(phone));
+
+
+ul.appendChild(list);
+
+});
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
