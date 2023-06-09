@@ -24,6 +24,9 @@
 </div>   
 <script>
 const form=document.getElementById('addform');
+const ul=document.getElementById('ullist');
+ul.addEventListener('click',removeitem)
+
 form.addEventListener('submit',function (e){
     e.preventDefault(); 
 
@@ -46,21 +49,39 @@ console.log(objec_ser);
 console.log(localStorage);
 
 
-var ul=document.getElementById('ullist');
+
 
 var list=document.createElement('li');
 list.appendChild(document.createTextNode(name+' - '));
-list.appendChild(document.createTextNode(email+' - '));
-list.appendChild(document.createTextNode(phone));
+list.appendChild(document.createTextNode(email));
+list.appendChild(document.createTextNode(' - '+phone));
+list.setAttribute('data-email',email);
 
+var btn=document.createElement('button');
+btn.appendChild(document.createTextNode('delete'));
+list.appendChild(btn);
+btn.className='delete';
 
 ul.appendChild(list);
+
 
 });
 
 
 
+function removeitem(e){
 
+    if(e.target.classList.contains('delete'))  {
+    var li=e.target.parentElement;
+    ul.removeChild(li);
+
+    var delemail=li.getAttribute('data-email') ;
+console.log(delemail);
+localStorage.removeItem(delemail);
+
+  }
+
+}
 
 
 
