@@ -27,11 +27,13 @@ const form=document.getElementById('addform');
 const ul=document.getElementById('ullist');
 ul.addEventListener('click',removeitem)
 
+
+
 form.addEventListener('submit',function (e){
     e.preventDefault(); 
 
 
-var name=document.getElementById('name').value;
+    var name=document.getElementById('name').value;
 var email=document.getElementById('email').value;
 var phone =document.getElementById('phone').value;
 
@@ -45,7 +47,7 @@ let objec={
 
 let objec_ser=JSON.stringify(objec);
 localStorage.setItem(email,objec_ser);
-console.log(objec_ser);
+// console.log(objec_ser);
 console.log(localStorage);
 
 
@@ -61,6 +63,10 @@ var btn=document.createElement('button');
 btn.appendChild(document.createTextNode('delete'));
 list.appendChild(btn);
 btn.className='delete';
+var edit=document.createElement('button');
+edit.appendChild(document.createTextNode('edit'));
+list.appendChild(edit);
+edit.className='edit';
 
 ul.appendChild(list);
 
@@ -81,7 +87,33 @@ localStorage.removeItem(delemail);
 
   }
 
+  else if(e.target.classList.contains('edit')){
+
+    var li=e.target.parentElement;
+
+    var delemail=li.getAttribute('data-email') ;
+    var obj=JSON.parse(localStorage.getItem(delemail));
+    console.log(obj);
+     this.name=obj.name;
+     email=obj.email;
+     phone=obj.phone;
+    console.log(this.name);
+
+    var name1=document.getElementById('name');
+var email1=document.getElementById('email');
+var phone1 =document.getElementById('phone');
+name1.value=obj.name;
+email1.value=obj.email;
+phone1.value=obj.phone;
+
+
+localStorage.removeItem(delemail);
+ul.removeChild(li);
+
+  }
+
 }
+
 
 
 
